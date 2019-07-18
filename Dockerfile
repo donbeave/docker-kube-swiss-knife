@@ -25,7 +25,7 @@ RUN export GOPATH="${HOME}/.go" \
     && cd helm.sh \
     && git clone https://github.com/helm/helm.git \
     && cd helm \
-    && git checkout dev-v3 \
+    && git checkout d23d68d51ccee47891fd1adb37dd365941f6c4bd \
     && make bootstrap build
 # @end Build Helm 3
 
