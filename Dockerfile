@@ -157,7 +157,7 @@ RUN mkdir -p $HOME/.kube/
 
 
 # Install kubedog
-RUN curl -o /usr/local/bin/kubedog -sSL https://dl.bintray.com/flant/kubedog/v0.3.2/kubedog-linux-amd64-v0.3.2
+RUN curl -o /usr/local/bin/kubedog -sSL https://dl.bintray.com/flant/kubedog/v0.3.3/kubedog-linux-amd64-v0.3.3
 RUN chmod 755 /usr/local/bin/kubedog
 # @end Install kubedog
 
