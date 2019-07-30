@@ -1,25 +1,34 @@
 # Build Helm 3
 FROM ubuntu:18.04 AS helm3
 
-RUN apt-get update \
+RUN set -ex \
+    && apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y \
                ca-certificates \
                wget \
                git \
                build-essential \
+               curl \
     && rm -rf /var/lib/apt/lists/* \
               /tmp/*
 
-RUN wget https://dl.google.com/go/go1.12.7.linux-amd64.tar.gz \
+RUN set -ex \
+    && wget https://dl.google.com/go/go1.12.7.linux-amd64.tar.gz \
     && tar -xvf go1.12.7.linux-amd64.tar.gz \
     && mv go /usr/local
 
-RUN export GOPATH="${HOME}/.go" \
-    && export GOROOT=/usr/local/go \
-    && export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin" \
-    && mkdir -p "${GOPATH}" \
-    && mkdir -p "${GOPATH}/src/github.com" \
+ENV GOPATH="/root/.go"
+ENV GOROOT=/usr/local/go
+ENV PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+
+RUN set -ex \
+    && mkdir -p "${GOPATH}/bin" \
+    && mkdir -p "${GOPATH}/src/github.com"
+
+RUN curl https://glide.sh/get | sh
+
+RUN set -ex \
     && cd $GOPATH/src/ \
     && mkdir -p helm.sh \
     && cd helm.sh \
@@ -38,7 +47,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 
 # Locale config
-RUN apt-get update \
+RUN set -ex \
+    && apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
                locales \
@@ -58,7 +68,8 @@ RUN /locale.sh
 
 
 # Install basic dependencies
-RUN apt-get update \
+RUN set -ex \
+    && apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
                ca-certificates \
@@ -98,7 +109,8 @@ RUN gomplate --version
 
 
 # Install Docker
-RUN apt-get update \
+RUN set -ex \
+    && apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
                apt-transport-https \
@@ -111,7 +123,8 @@ RUN apt-get update \
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 RUN apt-key fingerprint 0EBFCD88
 RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-RUN apt-get update \
+RUN set -ex \
+    && apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y \
                docker-ce \
