@@ -84,6 +84,8 @@ RUN apt-get update \
 
 # Install Helm 3
 COPY --from=helm3 /root/.go/src/helm.sh/helm/bin/helm /usr/local/bin/helm
+ENV HELM_HOME="/usr/local/helm3"
+RUN mkdir -p ${HELM_HOME}
 RUN helm version
 # @end Install Helm 3
 
