@@ -1,0 +1,24 @@
+image: ubuntu:18.04
+
+services:
+  - docker:dind
+
+variables:
+  # Need to setup DOCKER_HOST to enable Docker in GitLab Cloud CI
+  DOCKER_HOST: tcp://docker:2375
+  # When using dind, it's wise to use the overlayfs driver for
+  # improved performance.
+  DOCKER_DRIVER: overlay2
+
+stages:
+  - build
+  - upload
+
+build-app:
+  stage: build
+  script:
+    - docker info
+    - ./build.sh
+    - ./upload.sh
+  only:
+    - master
