@@ -12,11 +12,6 @@ DOCKER_REPOSITORY="donbeave/$PACKAGE"
 
 printf "> \e[1;37mUploading Docker\e[0m\n\n"
 
-if [[ -z "${DOCKER_REGISTRY}" ]]; then
-  printf "\e[1;91mERROR\e[0m: DOCKER_REGISTRY is not set\n"
-  exit 1
-fi
-
 if [[ -z "${DOCKER_USERNAME}" ]]; then
   printf "\e[1;91mERROR\e[0m: DOCKER_USERNAME is not set\n"
   exit 1
@@ -29,7 +24,7 @@ fi
 
 printf "# \e[93mLogin to the registry\e[0m\n\n"
 
-docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" "${DOCKER_REGISTRY}"
+docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
 
 printf "\n> \e[1;37mUploading Docker image\e[0m\n"
 printf "# Image \e[1;37m%s\e[0m\n\n" "${DOCKER_REPOSITORY}:${VERSION}"
