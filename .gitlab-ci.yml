@@ -22,7 +22,5 @@ build-and-upload:
     - apk add docker
   script:
     - docker info
-    - ls
-    - chmod a+x build-docker.sh
     - ./build-docker.sh
     - ./upload.sh
