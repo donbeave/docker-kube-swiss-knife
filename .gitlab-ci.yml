@@ -20,6 +20,7 @@ build-and-upload:
   stage: build
   script:
     - docker info
+    - ls
     - ./build.sh
     - ./upload.sh
   only:
