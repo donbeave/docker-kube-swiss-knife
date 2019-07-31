@@ -23,4 +23,4 @@ build-and-upload:
   script:
     - docker info
     - ./build-docker.sh
-    - ./upload.sh
+    - ./upload-docker.sh
