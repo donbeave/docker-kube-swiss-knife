@@ -1,4 +1,4 @@
-image: docker:stable
+image: alpine:3.10.1
 
 services:
   - docker:dind
@@ -17,6 +17,9 @@ stages:
 
 build-and-upload:
   stage: build
+  before_script:
+    - apk add bash
+    - apk add docker
   script:
     - docker info
     - ls
