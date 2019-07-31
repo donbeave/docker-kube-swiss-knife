@@ -23,5 +23,3 @@ build-and-upload:
     - ls
     - ./build.sh
     - ./upload.sh
-  only:
-    - master
