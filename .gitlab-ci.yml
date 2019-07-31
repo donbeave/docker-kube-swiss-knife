@@ -6,6 +6,8 @@ services:
 variables:
   # Need to setup DOCKER_HOST to enable Docker in GitLab Cloud CI
   DOCKER_HOST: tcp://docker:2375
+  # https://gitlab.com/gitlab-org/gitlab-runner/issues/4501
+  DOCKER_TLS_CERTDIR: ""
   # When using dind, it's wise to use the overlayfs driver for
   # improved performance.
   DOCKER_DRIVER: overlay2
