@@ -14,7 +14,7 @@ stages:
   - build
   - upload
 
-build-app:
+build-and-upload:
   stage: build
   script:
     - docker info
