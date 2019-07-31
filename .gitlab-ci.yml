@@ -1,4 +1,4 @@
-image: docker:stable
+image: alpine:3.10.1
 
 services:
   - docker:dind
@@ -14,14 +14,13 @@ variables:
 
 stages:
   - build
-  - upload
 
 build-and-upload:
   stage: build
+  before_script:
+    - apk add bash
+    - apk add docker
   script:
     - docker info
-    - ls
-    - ./build.sh
-    - ./upload.sh
-  only:
-    - master
+    - ./build-docker.sh
+    - ./upload-docker.sh
