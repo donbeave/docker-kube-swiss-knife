@@ -174,6 +174,18 @@ RUN chmod 755 /usr/local/bin/kubens
 # @end Install kubens
 
 
+# Install Flyway
+RUN set -ex \
+    && cd /tmp \
+    && wget https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.2.4/flyway-commandline-5.2.4-linux-x64.tar.gz \
+    && tar -xzvf flyway-commandline-5.2.4-linux-x64.tar.gz \
+    && mv flyway-5.2.4 /usr/local \
+    && ln -s /usr/local/flyway-5.2.4/flyway /usr/local/bin \
+    && rm flyway-commandline-5.2.4-linux-x64.tar.gz \
+    && rm -rf /tmp/*
+# @end Install Flyway
+
+
 COPY docker-entrypoint.sh /
 RUN chmod a+x /docker-entrypoint.sh
 
