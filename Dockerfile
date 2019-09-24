@@ -1,44 +1,3 @@
-# Build Helm 3 from scratch
-#FROM ubuntu:18.04 AS helm3
-#
-#RUN set -ex \
-#    && apt-get update \
-#    && apt-get upgrade -y \
-#    && apt-get install -y \
-#               ca-certificates \
-#               wget \
-#               git \
-#               build-essential \
-#               curl \
-#    && rm -rf /var/lib/apt/lists/* \
-#              /tmp/*
-#
-#RUN set -ex \
-#    && wget https://dl.google.com/go/go1.12.7.linux-amd64.tar.gz \
-#    && tar -xvf go1.12.7.linux-amd64.tar.gz \
-#    && mv go /usr/local
-#
-#ENV GOPATH="/root/.go"
-#ENV GOROOT=/usr/local/go
-#ENV PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
-#
-#RUN set -ex \
-#    && mkdir -p "${GOPATH}/bin" \
-#    && mkdir -p "${GOPATH}/src/github.com"
-#
-#RUN curl https://glide.sh/get | sh
-#
-#RUN set -ex \
-#    && cd $GOPATH/src/ \
-#    && mkdir -p helm.sh \
-#    && cd helm.sh \
-#    && git clone https://github.com/helm/helm.git \
-#    && cd helm \
-#    && git checkout 2f16e0ed26dc592bb1a0e4a0224aa7d1c28df18d \
-#    && make bootstrap build
-# @end Build Helm 3 from scratch
-
-
 FROM ubuntu:18.04
 
 MAINTAINER Alexey Zhokhov <alexey@zhokhov.com>
@@ -93,22 +52,14 @@ RUN set -ex \
 # @end Install basic dependencies
 
 
-# Install Helm 3 from scratch
-#COPY --from=helm3 /root/.go/src/helm.sh/helm/bin/helm /usr/local/bin/helm
-#ENV HELM_HOME="/usr/local/helm3"
-#RUN mkdir -p ${HELM_HOME}
-#RUN helm version
-# @end Install Helm 3 from scratch
-
-
 # Install Helm 3
 RUN set -ex \
     && cd /tmp \
-    && wget https://get.helm.sh/helm-v3.0.0-alpha.2-linux-amd64.tar.gz \
-    && tar -xzvf helm-v3.0.0-alpha.2-linux-amd64.tar.gz \
+    && wget https://get.helm.sh/helm-v3.0.0-beta.3-linux-amd64.tar.gz \
+    && tar -xzvf helm-v3.0.0-beta.3-linux-amd64.tar.gz \
     && mv linux-amd64/helm /usr/local/bin/helm \
     && chmod 755 /usr/local/bin/helm \
-    && rm helm-v3.0.0-alpha.2-linux-amd64.tar.gz \
+    && rm helm-v3.0.0-beta.3-linux-amd64.tar.gz \
     && rm -rf /tmp/*
 RUN helm version
 # @end Install Helm 3
@@ -157,7 +108,7 @@ RUN mkdir -p $HOME/.kube/
 
 
 # Install kubedog
-RUN curl -o /usr/local/bin/kubedog -sSL https://dl.bintray.com/flant/kubedog/v0.3.3/kubedog-linux-amd64-v0.3.3
+RUN curl -o /usr/local/bin/kubedog -sSL https://dl.bintray.com/flant/kubedog/v0.3.4/kubedog-linux-amd64-v0.3.4
 RUN chmod 755 /usr/local/bin/kubedog
 # @end Install kubedog
 
