@@ -55,11 +55,11 @@ RUN set -ex \
 # Install Helm 3
 RUN set -ex \
     && cd /tmp \
-    && wget https://get.helm.sh/helm-v3.0.0-rc.3-linux-amd64.tar.gz \
-    && tar -xzvf helm-v3.0.0-rc.3-linux-amd64.tar.gz \
+    && wget https://get.helm.sh/helm-v3.0.0-linux-amd64.tar.gz \
+    && tar -xzvf helm-v3.0.0-linux-amd64.tar.gz \
     && mv linux-amd64/helm /usr/local/bin/helm \
     && chmod 755 /usr/local/bin/helm \
-    && rm helm-v3.0.0-rc.3-linux-amd64.tar.gz \
+    && rm helm-v3.0.0-linux-amd64.tar.gz \
     && rm -rf /tmp/*
 RUN helm version
 # @end Install Helm 3
