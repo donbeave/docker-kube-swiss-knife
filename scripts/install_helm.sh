@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eux
 
-helm_version="3.0.3"
+helm_version="3.2.1"
 
 cd /tmp
 curl -o /tmp/helm-v${helm_version}-linux-amd64.tar.gz -sSL https://get.helm.sh/helm-v${helm_version}-linux-amd64.tar.gz
