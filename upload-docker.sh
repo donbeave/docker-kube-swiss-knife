@@ -7,7 +7,7 @@ set -e
 # config
 PACKAGE="kube-swiss-knife"
 VERSION="latest"
-DOCKER_REPOSITORY="registry.gitlab.com/donbeave/docker-kube-swiss-knife"
+DOCKER_REPOSITORY="registry.gitlab.com/donbeave/kube-swiss-knife"
 # @end config
 
 printf "> \e[1;37mUploading Docker\e[0m\n\n"
